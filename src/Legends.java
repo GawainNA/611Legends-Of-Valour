@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-
+//test comment- aditya
 public class Legends {
     Player player;
     Map map;
