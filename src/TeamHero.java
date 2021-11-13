@@ -8,4 +8,8 @@ public class TeamHero extends Team{
     public int size(){
         return heroes.size();
     }
+
+    public ArrayList<Hero> getHeroes() {
+        return heroes;
+    }
 }

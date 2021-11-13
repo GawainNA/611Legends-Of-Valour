@@ -11,6 +11,15 @@ public class LegendsValor {
     TeamMonster monsters;
     Scanner scan =new Scanner(System.in);
 
+    public void displayHeroInformation(){
+        for(Hero hero : heroes.getHeroes()){
+            System.out.println(hero.getName()+"     Armor: "+hero.getArmor().getName()+"     Weapon: "+hero.getWeapon().getName());
+            System.out.println("HP: "+hero.getHP_current()+"/"+hero.getHP_capacity()+"       AD:"+hero.getAttack_damage()+"    AP:"+hero.getAbility_power());
+            System.out.println("MP: "+hero.getMP_current()+"/"+hero.getMP_capacity()+"       AR:"+hero.getAttack_resist()+"    MR:"+hero.getMagic_resist());
+            System.out.println("Exp: "+hero.getExp_current()+"/"+hero.getExp_expectation());
+            System.out.println();
+        }
+    }
     void pickHero(){
         while (true){
             System.out.println("Select your Heroes:");
