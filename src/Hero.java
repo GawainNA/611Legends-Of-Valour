@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class Hero extends Character {
 
+    int money=100;
+    Bag bag=new Bag();
     Armor armor;
     Weapon weapon;
     ArrayList<Spell> spells=new ArrayList<>();
@@ -146,6 +148,34 @@ public class Hero extends Character {
 
     public void recoverMP(int amount){
         MP_current+=amount;
+    }
+
+    public int getMoney(){
+        return money;
+    }
+
+    public void addMoney(int add){
+        money+=add;
+    }
+
+    public void loseMoney(int lose){
+        money-=lose;
+    }
+
+    public void addItem(Item item){
+        bag.add(item);
+    }
+
+    public void removeItem(Item item){
+        bag.remove(item);
+    }
+
+    public void printBag(){
+        bag.printContent();
+    }
+
+    public Bag getBag(){
+        return bag;
     }
 
 }
