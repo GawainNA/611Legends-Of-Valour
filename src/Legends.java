@@ -4,11 +4,11 @@ import java.util.Scanner;
 public class Legends {
     Player player;
     Map map;
-    Scanner scan =new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
     int HeroX = 0;
     int HeroY = 0;
-    int row=10;
-    int column=10;
+    int row = 10;
+    int column = 10;
 
     public void startGame(){
 
