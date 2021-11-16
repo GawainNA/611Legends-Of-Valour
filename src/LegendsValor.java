@@ -11,6 +11,8 @@ public class LegendsValor {
     TeamMonster monsters;
     Scanner scan =new Scanner(System.in);
 
+    
+
     public void displayHeroInformation(){
         for(Hero hero : heroes.getHeroes()){
             System.out.println(hero.getName()+"     Armor: "+hero.getArmor().getName()+"     Weapon: "+hero.getWeapon().getName());

@@ -70,13 +70,13 @@ public class Market {
         System.out.println(result);
     }
 
-    public void buyItem(Player player,Item item){
-        if(player.getMoney()>=item.getPrice()){
+    public void buyItem(Hero hero,Item item){
+        if(hero.getMoney()>=item.getPrice()){
             System.out.println("Please Make sure you want to buy "+item.getName()+" (y/n)");
             Scanner scan = new Scanner(System.in);
             if(scan.next().equals("y")){
-                player.addItem(item);
-                player.loseMoney(item.getPrice());
+                hero.addItem(item);
+                hero.loseMoney(item.getPrice());
                 remove(item);
                 System.out.println("Succeed!");
             }
@@ -87,19 +87,19 @@ public class Market {
         }
     }
 
-    public void EnterMarket(Player player){
+    public void EnterMarket(Hero hero){
         while (true){
             System.out.println("You are in the Market now! What do you want to do?");
             int choice= Utils.safeIntInput("1. Buy    2. Sell    3. Exit",1,3);
             switch (choice){
-                case 1: EnterBuy(player);break;
-                case 2: EnterSell(player);break;
+                case 1: EnterBuy(hero);break;
+                case 2: EnterSell(hero);break;
                 case 3: return;
             }
         }
     }
 
-    public void EnterBuy(Player player){
+    public void EnterBuy(Hero hero){
         while (true){
             System.out.println("Which one do you want to buy? ");
             printMarket();
@@ -112,30 +112,30 @@ public class Market {
             item.printDetail();
             int subchoice = Utils.safeIntInput("1. Buy  2. Back", 1,2);
             if(subchoice==1){
-                buyItem(player,item);
+                buyItem(hero,item);
             }
         }
     }
 
-    public void EnterSell(Player player){
+    public void EnterSell(Hero hero){
         while (true){
-            if(player.isBagEmpty()){
+            if(hero.isBagEmpty()){
                 System.out.println("Your bag is Empty!");
                 return;
             }
             System.out.println("Which one do you want to sell?");
-            player.printBag();
-            int choice= Utils.safeIntInput("Select one Item to know more details. Input -1 to get back.",-1,player.getBagSize());
+            hero.printBag();
+            int choice= Utils.safeIntInput("Select one Item to know more details. Input -1 to get back.",-1,hero.getBagSize());
             if(choice==-1){
                 break;
             }
-            Item item = player.getItemFromBag(choice-1);
+            Item item = hero.getItemFromBag(choice-1);
             System.out.println(item.getName()+"'s information:");
             item.printDetail();
             int subchoice = Utils.safeIntInput("1. Sell  2. Back", 1,2);
             if(subchoice==1){
-                player.removeItem(item);
-                player.addMoney(item.getSelling_price());
+                hero.removeItem(item);
+                hero.addMoney(item.getSelling_price());
                 market.add(item);
                 System.out.println("Succeed!");
             }

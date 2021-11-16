@@ -178,4 +178,16 @@ public class Hero extends Character {
         return bag;
     }
 
+    public boolean isBagEmpty(){
+        return bag.content.isEmpty();
+    }
+
+    public Item getItemFromBag(int index){
+        return bag.get(index);
+    }
+
+    public int getBagSize(){
+        return bag.size();
+    }
+
 }

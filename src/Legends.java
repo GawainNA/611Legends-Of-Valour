@@ -81,7 +81,9 @@ public class Legends {
                 }
                 case "e":break out;
             }
-            map.Cells[HeroX][HeroY].cellFunction(player);
+            for (Hero hero : player.heroes){
+                map.Cells[HeroX][HeroY].inCellFunction(hero);
+            }
         }
     }
 
