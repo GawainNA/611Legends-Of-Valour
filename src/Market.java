@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Market {
-    ArrayList<Item> market = new ArrayList<Item>();
+    ArrayList<Item> market = new ArrayList<>();
 
 
     public Market(){
@@ -80,17 +80,17 @@ public class Market {
                 remove(item);
                 System.out.println("Succeed!");
             }
-            else return;
+            else System.out.println("Canceled!");
         }else {
             System.out.println("Your money is not enough!");
-            return;
         }
     }
 
     public void EnterMarket(Hero hero){
         while (true){
             System.out.println("You are in the Market now! What do you want to do?");
-            int choice= Utils.safeIntInput("1. Buy    2. Sell    3. Exit",1,3);
+            int choice;
+            choice = Utils.safeIntInput("1. Buy    2. Sell    3. Exit",1,3);
             switch (choice){
                 case 1: EnterBuy(hero);break;
                 case 2: EnterSell(hero);break;

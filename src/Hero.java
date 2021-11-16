@@ -190,4 +190,8 @@ public class Hero extends Character {
         return bag.size();
     }
 
+    public void displayInformation(){
+
+    }
+
 }
