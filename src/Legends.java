@@ -1,6 +1,6 @@
 
 import java.util.Scanner;
-//test comment- aditya
+
 public class Legends {
     Player player;
     Map map;
@@ -10,9 +10,14 @@ public class Legends {
     int row=10;
     int column=10;
 
-    public void startGame(){
+    public void startGame() throws InterruptedException{
+    	String welcome = "WELCOME TO LEGENDS...BUCKLE UP TO FLY.....";
+        for (int i = 0; i < welcome.length(); i++) {
+            System.out.print(welcome.charAt(i));
+            Thread.sleep(150L); // in milliseconds
+        }
 
-        System.out.println("Welcome To Legends!");
+        Asciiart.printHelicopter();
         System.out.println("Please input your name:");
         player=Player.createPlayer(scan.nextLine());
         System.out.println("You can input -1 to Exit anytime.");
