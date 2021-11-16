@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-public class LegendsValor {
+public class LegendsValor implements Playable {
     class Location{
-        int x;
-        int y;
+        public int x;
+        public int y;
         public Location (int x, int y) {
             this.x = x;
             this.y = y;
@@ -19,11 +18,29 @@ public class LegendsValor {
             return (x / 3);
         }
     }
+
+    Map map;
     TeamHero heroes;
     TeamMonster monsters;
     HashMap<Hero, Location> heroLocation;
     HashMap<Monster, Location> monsterLocation;
-    Scanner scan =new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
+
+    public void gameStart() {
+
+    }
+    public void gameEnd() {
+
+    }
+    public void roundStart() {
+
+    }
+    public void roundEnd() {
+
+    }
+    public void run() {
+
+    }
 
     public void displayHeroInformation(){
         for(Hero hero : heroes.getHeroes()){
@@ -80,7 +97,7 @@ public class LegendsValor {
         }
     }
 
-    public void constructMap() {
+    public void constructLocationMapping() {
         ArrayList<Hero> heroes = this.heroes.getHeroes();
         ArrayList<Monster> monsters = this.monsters.getMonsters();
         this.heroLocation = new HashMap<Hero, Location>();
@@ -88,8 +105,52 @@ public class LegendsValor {
         for (int i = 0; i < 3; i++) {
             Hero h = heroes.get(i);
             Monster m = monsters.get(i);
-            heroLocation.put(h, new Location(i, 1, 0));
-            monsterLocation.put(m, new Location(i, 1, 7));
+            heroLocation.put(h, new Location(i, 1, 7));
+            monsterLocation.put(m, new Location(i, 1, 0));
         }
+    }
+
+    public boolean move (Character c, Location goal) {
+        if (goal.x < 0 || goal.y < 0 || goal.x >= map.column || goal.y >= map.row) {
+            return false;
+        }
+        if (map.cells[goal.x][goal.y] instanceof InaccessibleCell) {
+            return false;
+        }
+        if (c instanceof Hero) {
+            heroLocation.put((Hero)c, goal);
+        }
+        else if (c instanceof Monster) {
+            monsterLocation.put((Monster)c, goal);
+        }
+        else {
+            return false;
+        }
+        return true;
+    }
+
+    public ArrayList<Hero> detectHero (Monster m) {
+        ArrayList<Hero> targets = new ArrayList<>();
+        Location mLocation = monsterLocation.get(m);
+        for (Hero h : heroes.getHeroes()) {
+            Location hLocation = heroLocation.get(h);
+            if (Math.abs(hLocation.x - mLocation.x) <= 1 &&
+            Math.abs(hLocation.y - mLocation.y) <= 1) {
+                targets.add(h);
+            }
+        }
+        return targets;
+    }
+    public ArrayList<Monster> detectMonster (Hero h) {
+        ArrayList<Monster> targets = new ArrayList<>();
+        Location hLocation = heroLocation.get(h);
+        for (Monster m : monsters.getMonsters()) {
+            Location mLocation = monsterLocation.get(m);
+            if (Math.abs(hLocation.x - mLocation.x) <= 1 &&
+                    Math.abs(hLocation.y - mLocation.y) <= 1) {
+                targets.add(m);
+            }
+        }
+        return targets;
     }
 }

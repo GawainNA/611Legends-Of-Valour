@@ -2,12 +2,12 @@
 public class Map {
     int row;
     int column;
-    RPGCell[][] Cells;
+    RPGCell[][] cells;
 
     Map(int row, int column){
         this.row=row;
         this.column=column;
-        Cells = new RPGCell[row][column];
+        cells = new RPGCell[row][column];
     }
 
     public void printMap(){
@@ -19,7 +19,7 @@ public class Map {
         String result="";
         for(int i=0;i<row;i++){
             for(int j=0;j<column;j++){
-                col_b=col_b.concat(Cells[i][j]+" |");
+                col_b=col_b.concat(cells[i][j]+" |");
             }
             result=result.concat(col_a+"\n"+col_b+"\n");
             col_b="|";
@@ -27,6 +27,5 @@ public class Map {
         result=result.concat(col_a);
         System.out.println(result);
     }
-
 
 }
