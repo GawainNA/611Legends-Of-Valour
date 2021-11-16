@@ -1,14 +1,28 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class LegendsValor {
-    class location{
+    class Location{
         int x;
         int y;
+        public Location (int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+        public Location (int lane, int x, int y) {
+            this.x = lane * 3 + x;
+            this.y = y;
+        }
+        public int getLane() {
+            return (x / 3);
+        }
     }
     TeamHero heroes;
     TeamMonster monsters;
+    HashMap<Hero, Location> heroLocation;
+    HashMap<Monster, Location> monsterLocation;
     Scanner scan =new Scanner(System.in);
 
     
@@ -65,6 +79,19 @@ public class LegendsValor {
                 System.out.println("You have chosen 3 heroes! Let's begin!");
                 break;
             }
+        }
+    }
+
+    public void constructMap() {
+        ArrayList<Hero> heroes = this.heroes.getHeroes();
+        ArrayList<Monster> monsters = this.monsters.getMonsters();
+        this.heroLocation = new HashMap<Hero, Location>();
+        this.monsterLocation = new HashMap<Monster, Location>();
+        for (int i = 0; i < 3; i++) {
+            Hero h = heroes.get(i);
+            Monster m = monsters.get(i);
+            heroLocation.put(h, new Location(i, 1, 0));
+            monsterLocation.put(m, new Location(i, 1, 7));
         }
     }
 }
