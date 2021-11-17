@@ -4,7 +4,7 @@ public abstract class Character {
     String name;
     int HP_capacity;
     int HP_current;
-    float dodge_chance;
+    double dodge_chance;
     int attack_damage;
     int ability_power;
     int attack_resist;
@@ -26,7 +26,7 @@ public abstract class Character {
 
     public String getName() {return name;}
 
-    public float getDodge_chance() {return dodge_chance;}
+    public double getDodge_chance() {return dodge_chance;}
 
     public int getHP_capacity() {return HP_capacity;}
 
