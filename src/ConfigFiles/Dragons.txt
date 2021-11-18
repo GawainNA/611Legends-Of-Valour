@@ -1,0 +1,13 @@
+Name/level/attack_damage/ability_power/attack_resist/magic_resist/dodge chance
+Desghidorrah	 3       300   300    400  300   35
+Chrysophylax     2       200   200    500   400  20
+BunsenBurner	 4       400   400    500  300   45
+Natsunomeryu 	 1       100   100    200  200   10
+TheScaleless	 7       700   700    600   600  75
+Kas-Ethelinh     5       600    600   500  500   60
+Alexstraszan	 10      1000   1000   9000  900  55
+Phaarthurnax	 6       600   600    700  700   60
+D-Maleficent	 9       900   900    950  950   85
+TheWeatherbe 	 8       800    800   900   700  80
+Igneel           6       600   600    400  400   60
+BlueEyesWhite    9       900   900    600  600   75
