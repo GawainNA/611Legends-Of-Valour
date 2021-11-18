@@ -39,7 +39,7 @@ public class LegendsValor implements Playable {
     }
 
     public void gameStart() {
-        //TODO: generate map
+        map = MapCreator.ValorMap();
         displayHeroInformation();
         pickHero();
         constructLocationMapping();
