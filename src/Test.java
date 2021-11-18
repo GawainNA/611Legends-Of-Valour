@@ -223,7 +223,7 @@ public class Test {
         		System.out.print(CYAN_BACKGROUND +printableMap.get(i));
         	}
         	else if (i%3==2) {
-        		System.out.print(GREEN_BACKGROUND+printableMap.get(i));
+        		System.out.print(WHITE_BACKGROUND+printableMap.get(i));
         	}
         }
     }
