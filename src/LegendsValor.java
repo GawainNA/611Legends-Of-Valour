@@ -24,22 +24,55 @@ public class LegendsValor implements Playable {
     TeamMonster monsters;
     HashMap<Hero, Location> heroLocation;
     HashMap<Monster, Location> monsterLocation;
-    Scanner scan = new Scanner(System.in);
+    Scanner scan;
+    boolean heroWin;
+    boolean monsterWin;
+
+    public LegendsValor () {
+        scan = new Scanner(System.in);
+        heroWin = false;
+        monsterWin = false;
+        heroes = new TeamHero();
+        monsters = new TeamMonster();
+        heroLocation = new HashMap<>();
+        monsterLocation = new HashMap<>();
+    }
 
     public void gameStart() {
-
+        //TODO: generate map
+        displayHeroInformation();
+        pickHero();
+        constructLocationMapping();
     }
     public void gameEnd() {
-
+        if (heroWin && monsterWin) {
+            System.out.println("Draw!");
+        }
+        else if (heroWin) {
+            System.out.println("You win this game!");
+        }
+        else if (monsterWin) {
+            System.out.println("You lose this game!");
+        }
     }
     public void roundStart() {
+        for (Hero hero : heroes.getHeroes()) {
 
+        }
+        for (Monster monster : monsters.getMonsters()) {
+
+        }
     }
     public void roundEnd() {
-
+        //TODO: Check if heroes or monsters win and regain health & mana.
     }
     public void run() {
-
+        gameStart();
+        while (!heroWin && !monsterWin) {
+            roundStart();
+            roundEnd();
+        }
+        gameEnd();
     }
 
     public void displayHeroInformation(){
@@ -100,13 +133,28 @@ public class LegendsValor implements Playable {
     public void constructLocationMapping() {
         ArrayList<Hero> heroes = this.heroes.getHeroes();
         ArrayList<Monster> monsters = this.monsters.getMonsters();
-        this.heroLocation = new HashMap<Hero, Location>();
-        this.monsterLocation = new HashMap<Monster, Location>();
         for (int i = 0; i < 3; i++) {
             Hero h = heroes.get(i);
             Monster m = monsters.get(i);
             heroLocation.put(h, new Location(i, 1, 7));
             monsterLocation.put(m, new Location(i, 1, 0));
+        }
+    }
+
+    public void heroAction (Hero h) {
+        ArrayList<Monster> targets = detectMonster(h);
+
+    }
+    public void monsterAction (Monster m) {
+        ArrayList<Hero> targets = detectHero(m);
+        if (targets.size() == 0) {
+            Location currentLocation = monsterLocation.get(m);
+            boolean canGoForward = true;
+            boolean canGoAside = true;
+            for ()
+        }
+        else {
+
         }
     }
 
