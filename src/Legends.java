@@ -1,7 +1,18 @@
 
 import java.util.Scanner;
 
+
 public class Legends {
+	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_BLACK = "\u001B[30m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_BLUE = "\u001B[34m";
+	public static final String ANSI_PURPLE = "\u001B[35m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_WHITE = "\u001B[37m";
     Player player;
     Map map;
     Scanner scan =new Scanner(System.in);
@@ -13,12 +24,12 @@ public class Legends {
     public void startGame() throws InterruptedException{
     	String welcome = "WELCOME TO LEGENDS...BUCKLE UP TO FLY.....";
         for (int i = 0; i < welcome.length(); i++) {
-            System.out.print(welcome.charAt(i));
+            System.out.print( ANSI_RED + welcome.charAt(i)+ ANSI_RESET);
             Thread.sleep(150L); // in milliseconds
         }
 
-        Asciiart.printHelicopter();
-        System.out.println("Please input your name:");
+        AsciiartFactory.printHelicopter();
+        System.out.println(ANSI_GREEN+"Please input your name:"+ ANSI_RESET);
         player=Player.createPlayer(scan.nextLine());
         System.out.println("You can input -1 to Exit anytime.");
 

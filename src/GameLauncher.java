@@ -1,6 +1,8 @@
 public class GameLauncher {
     public static void main(String[] args) {
-        Legends m=new Legends();
-        m.startGame();
+    	SoundFactory soundClass = new SoundFactory();
+    	soundClass.playBackGround("StarWars60");
+        //Legends m=new Legends();
+        //m.startGame();
     }
 }

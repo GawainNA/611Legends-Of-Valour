@@ -1,5 +1,7 @@
 
 public class Map {
+	public static final String CYAN_BACKGROUND = "\033[46m";
+	public static final String RESET = "\033[0m";
     int row;
     int column;
     RPGCell[][] Cells;
@@ -25,7 +27,7 @@ public class Map {
             col_b="|";
         }
         result=result.concat(col_a);
-        System.out.println(result);
+        System.out.println(CYAN_BACKGROUND+result+RESET);
     }
 
 
