@@ -16,9 +16,6 @@ public class BushCell extends RPGCell{
 
     @Override
     public String toString() {
-        if(isHeroLocated){
-            return "*";
-        }
         return " ";
     }
 }

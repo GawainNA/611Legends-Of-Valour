@@ -1,6 +1,6 @@
 
 
-public abstract class Character {
+public abstract class Character implements Fightable{
     String name;
     int HP_capacity;
     int HP_current;
@@ -46,7 +46,7 @@ public abstract class Character {
 
     public void setAttack_damage(int attack_damage) {this.attack_damage = attack_damage;}
 
-    public void setDodge_chance(float dodge_chance) {this.dodge_chance = dodge_chance;}
+    public void setDodge_chance(double dodge_chance) {this.dodge_chance = dodge_chance;}
 
     public void setHP_capacity(int HP_capacity) {this.HP_capacity = HP_capacity;}
 

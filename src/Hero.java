@@ -26,8 +26,8 @@ public class Hero extends Character {
     Hero(String name){
         super(name);
         level=1;
-        armor=Armor.createArmor("Usual Coat",0,0,1,1);
-        weapon=Weapon.createWeapon("Stick",0,0,1,1);
+        armor=ArmorFactory.createArmor("Usual Coat",0,0,1,1);
+        weapon=WeaponFactory.createWeapon("Stick",0,0,1,1);
     }
 
 
@@ -172,4 +172,19 @@ public class Hero extends Character {
 
     }
 
+
+    @Override
+    public int getDamage() {
+        return attack_damage+ability_power;
+    }
+
+    @Override
+    public int getDefense() {
+        return attack_resist+magic_resist;
+    }
+
+    @Override
+    public double getDodge() {
+        return dodge_chance;
+    }
 }

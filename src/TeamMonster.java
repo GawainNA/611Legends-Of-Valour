@@ -6,4 +6,8 @@ public class TeamMonster {
     public ArrayList<Monster> getMonsters() {
         return monsters;
     }
+
+    public void add(Monster monster){
+        monsters.add(monster);
+    }
 }

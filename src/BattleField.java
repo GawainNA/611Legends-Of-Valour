@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BattleField {
@@ -15,13 +16,6 @@ public class BattleField {
 
     public static BattleField createABattleField(Player player){
         return new BattleField(player);
-    }
-
-    public void BossCome(){
-        monsters.add(MonsterFactory.createDragon(data.getDragon()));
-        monsters.add(MonsterFactory.createDragon(data.getDarkDragon()));
-        monsters.add(MonsterFactory.createDragon(data.getDragon()));
-        BattleBegin();
     }
 
     boolean isAllDied(){
@@ -212,17 +206,19 @@ public class BattleField {
             int b= random.nextInt(100);
             int c= random.nextInt(70);
             if(a>b&&a>c){
-                monsters.add(MonsterFactory.createDragon(data.getDragon()));
-                ExpReward+=500;
-                MoneyReward+=1000;
+                List<String> wholeData=data.getDragonData();
+                String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                monsters.add(MonsterFactory.createDragon(selected));
             }else if(b>c){
-                monsters.add(MonsterFactory.createMonsterFighter(data.getMonsterFighter()));
-                ExpReward+=20;
-                MoneyReward+=50;
+                List<String> wholeData=data.getMonsterCasterData();
+                String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                monsters.add(MonsterFactory.createDragon(selected));
+                monsters.add(MonsterFactory.createMonsterFighter(selected));
             }else {
-                monsters.add(MonsterFactory.createMonsterCaster(data.getMonsterCaster()));
-                ExpReward+=20;
-                MoneyReward+=50;
+                List<String> wholeData=data.getMonsterFighterData();
+                String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                monsters.add(MonsterFactory.createDragon(selected));
+                monsters.add(MonsterFactory.createMonsterFighter(selected));
             }
         }
     }
