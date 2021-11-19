@@ -7,7 +7,7 @@ import java.util.*;
 
 
 public class LegendsValor implements Playable {
-    class Location{
+    public class Location{
         public int x;
         public int y;
         public Location (int x, int y) {
@@ -55,6 +55,9 @@ public class LegendsValor implements Playable {
         map = MapCreator.ValorMap();
         displayHeroInformation();
         pickHero();
+        Create_A_Monster();
+        Create_A_Monster();
+        Create_A_Monster();
         constructLocationMapping();
     }
     public void gameEnd() {
@@ -73,6 +76,7 @@ public class LegendsValor implements Playable {
             boolean moved = false;
             while (!moved) {
                 //TODO: display map
+                PrintableValorMap.printMap(heroLocation,monsterLocation,heroes,monsters);
                 moved = heroMove(heroAction(hero), hero);
             }
         }
@@ -105,12 +109,10 @@ public class LegendsValor implements Playable {
         }else if(b>c){
             List<String> wholeData=data.getMonsterCasterData();
             String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
-            monsters.add(MonsterFactory.createDragon(selected));
             monsters.add(MonsterFactory.createMonsterFighter(selected));
         }else {
             List<String> wholeData=data.getMonsterFighterData();
             String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
-            monsters.add(MonsterFactory.createDragon(selected));
             monsters.add(MonsterFactory.createMonsterFighter(selected));
         }
     }
@@ -159,7 +161,7 @@ public class LegendsValor implements Playable {
                     if(scan.nextLine().equals("y")){
                         List<String> wholeData=data.getWarriorData();
                         String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
-                        Hero warrior=HeroFactory.createTank(selected);
+                        Hero warrior=HeroFactory.createWarrior(selected);
                         heroes.addHero(warrior);
                     }
                 }
@@ -169,14 +171,14 @@ public class LegendsValor implements Playable {
                     if(scan.nextLine().equals("y")){
                         List<String> wholeData=data.getCasterData();
                         String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
-                        Hero caster=HeroFactory.createTank(selected);
+                        Hero caster=HeroFactory.createCaster(selected);
                         heroes.addHero(caster);
                     }
                 }
             }
             if(heroes.size()<3){
-                System.out.println("Do you want to select more heroes?(y/n)");
-                if(scan.nextLine().equals("n")){break;}
+                System.out.println("You have "+ heroes.size()+" heroes now, please continue choosing.");
+
             }else {
                 System.out.println("You have chosen 3 heroes! Let's begin!");
                 break;
