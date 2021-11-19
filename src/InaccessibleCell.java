@@ -6,11 +6,8 @@ public class InaccessibleCell extends RPGCell {
         isAccessible=false;
     }
     @Override
-<<<<<<< HEAD
-    public void cellFunction(Character player){
-=======
+
     public void inCellFunction(Character NPC){}
->>>>>>> main
 
 
     public void outCellFunction(Character NPC){}
