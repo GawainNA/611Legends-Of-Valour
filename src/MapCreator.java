@@ -5,54 +5,9 @@ import java.util.Collections;
 
 public class MapCreator {
 
-    static Map RandomCreateMap(int m,int n){
-        Map map = new Map(m,n);
-        int num=m*n;
-        int market_num=num/10;
-        int x_num=(int)(num*0.2);
-        int danger_num=(int)(num*0.4);
-        int safe_num=num-market_num-x_num-danger_num;
-
-        ArrayList<RPGCell> initial=new ArrayList<RPGCell>();
-        for(int i=0;i<market_num;i++ ){
-            initial.add(new MarketCell());
-        }
-        for(int i=0;i<x_num;i++ ){
-            initial.add(new InaccessibleCell());
-        }
-        for(int i=0;i<danger_num;i++ ){
-            initial.add(new DangerousCell());
-        }
-        for(int i=0;i<safe_num;i++ ){
-            initial.add(new SafeCell());
-        }
-
-        Collections.shuffle(initial);
-
-        for (int i =0;i<m;i++){
-            for(int j=0;j<n;j++){
-                map.cells[i][j]=initial.get(0);
-                initial.remove(0);
-            }
-        }
-        map.cells[0][0]=new SafeCell();
-        map.cells[0][1]=new SafeCell();
-        map.cells[1][0]=new SafeCell();
-        map.cells[m-1][n-1]=new BossCell();
-        map.cells[m-1][n-2]=new DangerousCell();
-        map.cells[m-2][n-1]=new DangerousCell();
-
-        return map;
-    }
-
-<<<<<<< HEAD
-    public static Map ValorMap() {
-        return new Map();
-    }
-=======
     public static Map ValorMap(){
         Map map=new Map(8,8);
-        map.Cells= new RPGCell[][]{{new MonsterNexus(),new MonsterNexus(),new InaccessibleCell(),new MonsterNexus(),new MonsterNexus(),new InaccessibleCell(),new MonsterNexus(),new MonsterNexus()},
+        map.cells= new RPGCell[][]{{new MonsterNexus(),new MonsterNexus(),new InaccessibleCell(),new MonsterNexus(),new MonsterNexus(),new InaccessibleCell(),new MonsterNexus(),new MonsterNexus()},
                                    {new SafeCell(),    new SafeCell(),    new InaccessibleCell(),new CaveCell(),    new SafeCell(),    new InaccessibleCell(),new BushCell(),    new BushCell()},
                                    {new SafeCell(),    new SafeCell(),    new InaccessibleCell(),new SafeCell(),    new SafeCell(),    new InaccessibleCell(),new SafeCell(),    new SafeCell()},
                                    {new CaveCell(),    new BushCell(),    new InaccessibleCell(),new BushCell(),    new KoulouCell(),  new InaccessibleCell(),new KoulouCell(),  new SafeCell()},
@@ -63,5 +18,5 @@ public class MapCreator {
         return map;
     }
 
->>>>>>> main
+
 }
