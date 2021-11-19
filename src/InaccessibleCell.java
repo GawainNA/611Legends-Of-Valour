@@ -6,7 +6,7 @@ public class InaccessibleCell extends RPGCell {
         isAccessible=false;
     }
     @Override
-    public void cellFunction(Player player){
+    public void cellFunction(Character player){
 
     }
     public String toString(){

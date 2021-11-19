@@ -21,6 +21,6 @@ public abstract class RPGCell {
         return isAccessible;
     }
 
-    public abstract void cellFunction(Player player);
+    public abstract void cellFunction(Character player);
     public abstract String toString();
 }

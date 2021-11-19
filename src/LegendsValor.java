@@ -17,6 +17,15 @@ public class LegendsValor implements Playable {
         public int getLane() {
             return (x / 3);
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Location location = (Location) o;
+            return x == location.x &&
+                    y == location.y;
+        }
     }
 
     Map map;
@@ -57,10 +66,14 @@ public class LegendsValor implements Playable {
     }
     public void roundStart() {
         for (Hero hero : heroes.getHeroes()) {
-
+            boolean moved = false;
+            while (!moved) {
+                //TODO: display map
+                moved = heroMove(heroAction(hero), hero);
+            }
         }
         for (Monster monster : monsters.getMonsters()) {
-
+            monsterAction(monster);
         }
     }
     public void roundEnd() {
@@ -84,38 +97,38 @@ public class LegendsValor implements Playable {
             System.out.println();
         }
     }
-    void pickHero(){
+    public void pickHero(){
         while (true){
             System.out.println("Select your Heroes:");
             System.out.println("1.Tank   2.Warrior   3.Caster");
             System.out.println();
             int choice=Utils.safeIntInput("Select one to know more details",-1,4);
-            switch (choice){
-                case -1:System.out.println("Exit!");return;
-                case 1:{
+            switch (choice) {
+                case -1 -> {
+                    System.out.println("Exit!");
+                    return;
+                }
+                case 1 -> {
                     System.out.println("Tank has high HP and Defense, is a good shield.");
                     System.out.println("Do you want to add Tank to your team?(y/n)");
-                    if(scan.nextLine().equals("y")){
-                        Hero tank=HeroFactory.createTank(data.getTank());
+                    if (scan.nextLine().equals("y")) {
+                        Hero tank = HeroFactory.createTank(data.getTank());
                         heroes.addHero(tank);
                     }
-                    break;
                 }
-
-                case 2:{
+                case 2 -> {
                     System.out.println("Warrior has high attack damage.");
                     System.out.println("Do you want to add Warrior to your team?(y/n)");
-                    if(scan.nextLine().equals("y")){
-                        Hero warrior=HeroFactory.createWarrior(data.getWarrior());
+                    if (scan.nextLine().equals("y")) {
+                        Hero warrior = HeroFactory.createWarrior(data.getWarrior());
                         heroes.addHero(warrior);
                     }
-                    break;
                 }
-                case 3:{
+                case 3 -> {
                     System.out.println("Caster has high Magic damage, but low HP.");
                     System.out.println("Do you want to add Caster to your team?(y/n)");
-                    if(scan.nextLine().equals("y")){
-                        Hero Caster=HeroFactory.createCaster(data.getCaster());
+                    if (scan.nextLine().equals("y")) {
+                        Hero Caster = HeroFactory.createCaster(data.getCaster());
                         heroes.addHero(Caster);
                     }
                 }
@@ -141,9 +154,12 @@ public class LegendsValor implements Playable {
         }
     }
 
-    public void heroAction (Hero h) {
-        ArrayList<Monster> targets = detectMonster(h);
-
+    public String heroAction (Hero h) {
+        //TODO: hero action.
+        System.out.println("Select your action:");
+        System.out.println("W: Up  A: Left  S: Down  D: Right  T: Teleport B: Back");
+        System.out.println("1: Attack  2: Cast Spell  3: Use Potion  4: Change Equipment");
+        return scan.next().toLowerCase();
     }
     public void monsterAction (Monster m) {
         ArrayList<Hero> targets = detectHero(m);
@@ -151,11 +167,69 @@ public class LegendsValor implements Playable {
             Location currentLocation = monsterLocation.get(m);
             boolean canGoForward = true;
             boolean canGoAside = true;
-            for ()
+            for (Monster otherMonster : monsters.getMonsters()) {
+                Location otherMonsterLocation = monsterLocation.get(otherMonster);
+                if (otherMonsterLocation.x == currentLocation.x
+                        && otherMonsterLocation.y == currentLocation.y + 1) {
+                    canGoForward = false;
+                }
+                else if (Math.abs(otherMonsterLocation.x - currentLocation.x) == 1
+                        && otherMonsterLocation.y == currentLocation.y) {
+                    canGoAside = false;
+                }
+            }
+            if (!canGoForward && canGoAside) {
+                if (currentLocation.x % 3 == 0) {
+                    move(m, new Location(currentLocation.x + 1, currentLocation.y));
+                }
+                else if (currentLocation.x % 3 == 1) {
+                    move(m, new Location(currentLocation.x - 1, currentLocation.y));
+                }
+            }
+            else if (canGoForward) {
+                move(m, new Location(currentLocation.x, currentLocation.y + 1));
+            }
         }
         else {
-
+            Hero target = targets.get(0);
+            target.reduceHP(m.inflict(target));
+            if (target.getHP_current() <= 0) {
+                respawn(target);
+            }
         }
+    }
+
+    public boolean heroMove (String action, Hero h) {
+        ArrayList<Monster> targets = detectMonster(h);
+        Location currentLocation = heroLocation.get(h);
+        switch (action) {
+            case "w" -> {
+                Location goal = new Location(currentLocation.x, currentLocation.y - 1);
+                if (move(h, goal))
+                    return true;
+            }
+            case "a" -> {
+                Location goal = new Location(currentLocation.x - 1, currentLocation.y);
+                if (move(h, goal))
+                    return true;
+            }
+            case "s" -> {
+                Location goal = new Location(currentLocation.x, currentLocation.y + 1);
+                if (move(h, goal))
+                    return true;
+            }
+            case "d" -> {
+                Location goal = new Location(currentLocation.x + 1, currentLocation.y);
+                if (move(h, goal))
+                    return true;
+            }
+            //TODO: actions.
+            default -> {
+                System.out.println("Illegal input.");
+                return false;
+            }
+        }
+        return false;
     }
 
     public boolean move (Character c, Location goal) {
@@ -166,9 +240,18 @@ public class LegendsValor implements Playable {
             return false;
         }
         if (c instanceof Hero) {
+            for (Hero h : heroes.getHeroes()) {
+                if (heroLocation.get(h).equals(goal))
+                    return false;
+            }
             heroLocation.put((Hero)c, goal);
+            map.cells[goal.x][goal.y].cellFunction(c);
         }
         else if (c instanceof Monster) {
+            for (Monster m : monsters.getMonsters()) {
+                if (monsterLocation.get(m).equals(goal))
+                    return false;
+            }
             monsterLocation.put((Monster)c, goal);
         }
         else {
@@ -200,5 +283,14 @@ public class LegendsValor implements Playable {
             }
         }
         return targets;
+    }
+    public void respawn (Hero h) {
+        int lane = heroLocation.get(h).getLane();
+        h.recover();
+        h.loseMoney(h.getMoney() / 2);
+        if (!move(h, new Location(lane, 0, 7)))
+            if (!move(h, new Location(lane, 1, 7)))
+                move(h, new Location(lane, 0, 6));
+
     }
 }

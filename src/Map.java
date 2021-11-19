@@ -10,6 +10,10 @@ public class Map {
         cells = new RPGCell[row][column];
     }
 
+    public Map() {
+        this(8, 8);
+    }
+
     public void printMap(){
         String col_a="+";
         String col_b="|";

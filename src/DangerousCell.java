@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class DangerousCell extends RPGCell {
     @Override
-    public void cellFunction(Player player){
+    public void cellFunction(Character player){
         Random random=new Random();
         int dice=random.nextInt(100);
         if(dice>50) {

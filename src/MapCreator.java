@@ -30,18 +30,21 @@ public class MapCreator {
 
         for (int i =0;i<m;i++){
             for(int j=0;j<n;j++){
-                map.Cells[i][j]=initial.get(0);
+                map.cells[i][j]=initial.get(0);
                 initial.remove(0);
             }
         }
-        map.Cells[0][0]=new SafeCell();
-        map.Cells[0][1]=new SafeCell();
-        map.Cells[1][0]=new SafeCell();
-        map.Cells[m-1][n-1]=new BossCell();
-        map.Cells[m-1][n-2]=new DangerousCell();
-        map.Cells[m-2][n-1]=new DangerousCell();
+        map.cells[0][0]=new SafeCell();
+        map.cells[0][1]=new SafeCell();
+        map.cells[1][0]=new SafeCell();
+        map.cells[m-1][n-1]=new BossCell();
+        map.cells[m-1][n-2]=new DangerousCell();
+        map.cells[m-2][n-1]=new DangerousCell();
 
         return map;
     }
 
+    public static Map ValorMap() {
+        return new Map();
+    }
 }
