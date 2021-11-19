@@ -1,0 +1,7 @@
+Name/cost/level/attack_damage/ability_power
+Sword           500     1    800    300
+Bow             300     2    500    290
+Scythe          1000    6    1100   2000
+Axe             550     5    850    100
+TSwords     	1400    8    1600   200
+Dagger          200     1    250    100      

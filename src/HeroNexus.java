@@ -6,7 +6,7 @@ public class HeroNexus extends NexusCell{
             Hero hero=(Hero) NPC;
             market.EnterMarket(hero);
         }else {
-            System.out.println("Monster Win!");
+            System.out.println("Monster Reached Hero Nexus!!");
         }
     }
 

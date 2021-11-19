@@ -1,43 +1,48 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Market {
-    ArrayList<Item> market = new ArrayList<Item>();
+    ArrayList<Item> market = new ArrayList<>();
 
 
     public Market(){
         String[] tmp;
-        String[] armor=data.getArmor();
-        String[] weapon=data.getWeapon();
-        String[] IceSpells=data.getIceSpell();
-        String[] FireSpells=data.getFireSpell();
-        String[] LightingSpells=data.getLightingSpell();
+        List<String> armor = data.getArmorData();
+        List<String> weapon = data.getWeaponData();
+        List<String> IceSpells=data.getIceSpellData();
+        List<String> FireSpells=data.getFireSpellData();
+        List<String> LightSpells=data.getLightSpellData();
         String[] potion = data.getPotion();
 
         for(String i: armor){
-            tmp=i.split(" ");
-            Armor newthings=Armor.createArmor(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
+            tmp=i.split("\\s+");
+            Armor newthings=ArmorFactory.createArmor(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
             market.add(newthings);
         }
         for(String i: weapon){
-            tmp=i.split(" ");
-            Weapon newthings=Weapon.createWeapon(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
+            tmp=i.split("\\s+");
+            Weapon newthings=WeaponFactory.createWeapon(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
             market.add(newthings);
         }
 
         for(String i: IceSpells){
-            Spell spell=SpellFactory.createIceSpell(i);
+            tmp=i.split("\\s+");
+            Spell spell=SpellFactory.createIceSpell(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
             market.add(spell);
         }
         for(String i: FireSpells){
-            Spell spell=SpellFactory.createFireSpell(i);
+            tmp=i.split("\\s+");
+            Spell spell=SpellFactory.createFireSpell(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
             market.add(spell);
         }
-        for(String i: LightingSpells){
-            Spell spell=SpellFactory.createLightingSpell(i);
+        for(String i: LightSpells){
+            tmp=i.split("\\s+");
+            Spell spell=SpellFactory.createLightSpell(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
             market.add(spell);
         }
+
         for(String i: potion){
             potion p=PotionFactory.CreatePotion(i);
             market.add(p);
@@ -80,17 +85,17 @@ public class Market {
                 remove(item);
                 System.out.println("Succeed!");
             }
-            else return;
+            else System.out.println("Canceled!");
         }else {
             System.out.println("Your money is not enough!");
-            return;
         }
     }
 
     public void EnterMarket(Hero hero){
         while (true){
             System.out.println("You are in the Market now! What do you want to do?");
-            int choice= Utils.safeIntInput("1. Buy    2. Sell    3. Exit",1,3);
+            int choice;
+            choice = Utils.safeIntInput("1. Buy    2. Sell    3. Exit",1,3);
             switch (choice){
                 case 1: EnterBuy(hero);break;
                 case 2: EnterSell(hero);break;

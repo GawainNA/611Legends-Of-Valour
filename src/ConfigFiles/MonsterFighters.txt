@@ -1,0 +1,13 @@
+Name/level/attack_damage/ability_power/attack_resist/magic_resist/dodge chance
+Cyrrollalee     7       700   700     800  800   75
+Brandobaris     3       350    350    450  450   30
+BigBad-Wolf     1       150    150    250  250   15
+WickedWitch     2       250    250    350   350  25
+Aasterinian     4       400    400    500   500  45
+Chronepsish     6       650    650    750  750   60
+Kiaransalee     8       850    850    950  950   85
+St-Shargaas     5       550    550    650  650   55
+Merrshaullk     10      1000    1000   900  900   55
+St-Yeenoghu     9       950    950    850  850   90
+DocOck          6       600    600    600  600   55
+Exodia          10      1000    1000   1000  1000  50
