@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+=======
+import java.util.*;
+import java.util.Map;
+>>>>>>> main
 
 public class LegendsValor implements Playable {
     class Location{
@@ -88,6 +93,36 @@ public class LegendsValor implements Playable {
         gameEnd();
     }
 
+    LegendsValor(){
+        heroes=new TeamHero();
+        monsters=new TeamMonster();
+    }
+
+    void Create_A_Monster(){
+        Random random=new Random();
+        int a= random.nextInt(10);
+        int b= random.nextInt(100);
+        int c= random.nextInt(70);
+        if(a>b&&a>c){
+            List<String> wholeData=data.getDragonData();
+            String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+            monsters.add(MonsterFactory.createDragon(selected));
+        }else if(b>c){
+            List<String> wholeData=data.getMonsterCasterData();
+            String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+            monsters.add(MonsterFactory.createDragon(selected));
+            monsters.add(MonsterFactory.createMonsterFighter(selected));
+        }else {
+            List<String> wholeData=data.getMonsterFighterData();
+            String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+            monsters.add(MonsterFactory.createDragon(selected));
+            monsters.add(MonsterFactory.createMonsterFighter(selected));
+        }
+    }
+
+
+    
+
     public void displayHeroInformation(){
         for(Hero hero : heroes.getHeroes()){
             System.out.println(hero.getName()+"     Armor: "+hero.getArmor().getName()+"     Weapon: "+hero.getWeapon().getName());
@@ -97,7 +132,12 @@ public class LegendsValor implements Playable {
             System.out.println();
         }
     }
+<<<<<<< HEAD
     public void pickHero(){
+=======
+    void pickHero(){
+        Random random =new Random();
+>>>>>>> main
         while (true){
             System.out.println("Select your Heroes:");
             System.out.println("1.Tank   2.Warrior   3.Caster");
@@ -111,25 +151,47 @@ public class LegendsValor implements Playable {
                 case 1 -> {
                     System.out.println("Tank has high HP and Defense, is a good shield.");
                     System.out.println("Do you want to add Tank to your team?(y/n)");
+<<<<<<< HEAD
                     if (scan.nextLine().equals("y")) {
                         Hero tank = HeroFactory.createTank(data.getTank());
+=======
+                    if(scan.nextLine().equals("y")){
+                        List<String> wholeData=data.getTankData();
+                        String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                        Hero tank=HeroFactory.createTank(selected);
+>>>>>>> main
                         heroes.addHero(tank);
                     }
                 }
                 case 2 -> {
                     System.out.println("Warrior has high attack damage.");
                     System.out.println("Do you want to add Warrior to your team?(y/n)");
+<<<<<<< HEAD
                     if (scan.nextLine().equals("y")) {
                         Hero warrior = HeroFactory.createWarrior(data.getWarrior());
+=======
+                    if(scan.nextLine().equals("y")){
+                        List<String> wholeData=data.getWarriorData();
+                        String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                        Hero warrior=HeroFactory.createTank(selected);
+>>>>>>> main
                         heroes.addHero(warrior);
                     }
                 }
                 case 3 -> {
                     System.out.println("Caster has high Magic damage, but low HP.");
                     System.out.println("Do you want to add Caster to your team?(y/n)");
+<<<<<<< HEAD
                     if (scan.nextLine().equals("y")) {
                         Hero Caster = HeroFactory.createCaster(data.getCaster());
                         heroes.addHero(Caster);
+=======
+                    if(scan.nextLine().equals("y")){
+                        List<String> wholeData=data.getCasterData();
+                        String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                        Hero caster=HeroFactory.createTank(selected);
+                        heroes.addHero(caster);
+>>>>>>> main
                     }
                 }
             }

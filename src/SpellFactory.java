@@ -1,19 +1,14 @@
 
 public class SpellFactory {
 
-    public static Spell createIceSpell(String attributes){
-        String[] tmp = attributes.split(" ");
-        return new IceSpell(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
+    public static Spell createIceSpell(String name, int price, int level_require,int ability_power,int mana_consume){
+        return new IceSpell(name, price, level_require, ability_power, mana_consume);
     }
-
-    public static Spell createFireSpell(String attributes){
-        String[] tmp = attributes.split(" ");
-        return new IceSpell(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
+    public static Spell createFireSpell(String name, int price, int level_require,int ability_power,int mana_consume){
+        return new FireSpell(name, price, level_require, ability_power, mana_consume);
     }
-
-    public static Spell createLightingSpell(String attributes){
-        String[] tmp = attributes.split(" ");
-        return new IceSpell(tmp[0],Integer.parseInt(tmp[1]),Integer.parseInt(tmp[2]),Integer.parseInt(tmp[3]),Integer.parseInt(tmp[4]));
+    public static Spell createLightSpell(String name, int price, int level_require,int ability_power,int mana_consume){
+        return new LightingSpell(name, price, level_require, ability_power, mana_consume);
     }
 
 }
