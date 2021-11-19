@@ -286,7 +286,7 @@ public class LegendsValor implements Playable {
                     return false;
             }
             heroLocation.put((Hero)c, goal);
-            map.cells[goal.x][goal.y].cellFunction(c);
+            map.cells[goal.x][goal.y].inCellFunction(c);
         }
         else if (c instanceof Monster) {
             for (Monster m : monsters.getMonsters()) {
