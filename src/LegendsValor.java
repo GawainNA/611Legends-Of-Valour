@@ -400,7 +400,7 @@ public class LegendsValor implements Playable {
                 return true;
             }
             case "3" -> {
-                //TODO: Equip
+                
             }
             default -> {
                 System.out.println("Illegal input.");
@@ -413,10 +413,10 @@ public class LegendsValor implements Playable {
     // Place a hero or a monster into another grid.
     public boolean move (Character c, Location goal) {
         Location current = heroLocation.get(c);
-        if (goal.x < 0 || goal.y < 0 || goal.x >= map.column || goal.y >= map.row) {
+        if (goal.x < 0 || goal.y < 0 || goal.y >= map.column || goal.x >= map.row) {
             return false;
         }
-        if (map.cells[goal.x][goal.y] instanceof InaccessibleCell) {
+        if (map.cells[goal.y][goal.x] instanceof InaccessibleCell) {
             return false;
         }
         if (c instanceof Hero) {
@@ -425,14 +425,14 @@ public class LegendsValor implements Playable {
                     return false;
             }
             for (Monster m : monsters.getMonsters()) {
-                if (monsterLocation.get(m).y > goal.y
+                if (monsterLocation.get(m).x > goal.x
                         && monsterLocation.get(m).getLane() == goal.getLane())
                     return false;
             }
             heroLocation.put((Hero)c, goal);
             if (current != null)
-                map.cells[current.x][current.y].outCellFunction(c);
-            map.cells[goal.x][goal.y].inCellFunction(c);
+                map.cells[current.y][current.x].outCellFunction(c);
+            map.cells[goal.y][goal.x].inCellFunction(c);
         }
         else if (c instanceof Monster) {
             for (Monster m : monsters.getMonsters()) {
