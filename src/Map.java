@@ -14,6 +14,14 @@ public class Map {
         this(8, 8);
     }
 
+    public int getColumn() {
+        return column;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
     public void printMap(){
         String col_a="+";
         String col_b="|";

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 enum CellType {
     NEXUS,
@@ -86,20 +85,29 @@ public class PrintableValorMap {
         }
     }
 
-    public static void printMap(HashMap<Hero, LegendsValor.Location> HL, HashMap<Monster, LegendsValor.Location> ML, TeamHero heroes,TeamMonster monsters) {
+    public static void printMap(Map innerMap,HashMap<Hero, LegendsValor.Location> HL, HashMap<Monster, LegendsValor.Location> ML, TeamHero heroes, TeamMonster monsters) {
         int size = 8;
 
 
-        CellType [][]map = {
-                {CellType.NEXUS, CellType.NEXUS, CellType.INACCESSIBLE, CellType.NEXUS, CellType.NEXUS, CellType.INACCESSIBLE, CellType.NEXUS, CellType.NEXUS},
-                {CellType.PLAIN, CellType.PLAIN, CellType.INACCESSIBLE, CellType.CAVE, CellType.PLAIN, CellType.INACCESSIBLE, CellType.BUSH, CellType.BUSH},
-                {CellType.PLAIN, CellType.PLAIN, CellType.INACCESSIBLE, CellType.PLAIN, CellType.PLAIN, CellType.INACCESSIBLE, CellType.PLAIN, CellType.PLAIN},
-                {CellType.CAVE, CellType.BUSH, CellType.INACCESSIBLE, CellType.BUSH, CellType.KOULOU, CellType.INACCESSIBLE, CellType.KOULOU, CellType.PLAIN},
-                {CellType.PLAIN, CellType.PLAIN, CellType.INACCESSIBLE, CellType.BUSH, CellType.PLAIN, CellType.INACCESSIBLE, CellType.PLAIN, CellType.BUSH},
-                {CellType.KOULOU, CellType.KOULOU, CellType.INACCESSIBLE, CellType.KOULOU, CellType.PLAIN, CellType.INACCESSIBLE, CellType.PLAIN, CellType.PLAIN},
-                {CellType.PLAIN, CellType.PLAIN, CellType.INACCESSIBLE, CellType.PLAIN, CellType.PLAIN, CellType.INACCESSIBLE, CellType.PLAIN, CellType.PLAIN},
-                {CellType.NEXUS, CellType.NEXUS, CellType.INACCESSIBLE, CellType.NEXUS, CellType.NEXUS, CellType.INACCESSIBLE, CellType.NEXUS, CellType.NEXUS}
-        };
+        CellType [][]map = new CellType[8][8];
+
+        for(int i=0;i<innerMap.getRow();i++){
+            for(int j=0;j< innerMap.getColumn();j++){
+                if(innerMap.cells[i][j] instanceof NexusCell){
+                    map[i][j] = CellType.NEXUS;
+                } else if(innerMap.cells[i][j] instanceof InaccessibleCell){
+                    map[i][j] = CellType.INACCESSIBLE;
+                } else if(innerMap.cells[i][j] instanceof SafeCell){
+                    map[i][j] = CellType.PLAIN;
+                } else if(innerMap.cells[i][j] instanceof BushCell){
+                    map[i][j] = CellType.BUSH;
+                } else if(innerMap.cells[i][j] instanceof CaveCell){
+                    map[i][j] = CellType.CAVE;
+                } else if(innerMap.cells[i][j] instanceof KoulouCell){
+                    map[i][j] = CellType.KOULOU;
+                }
+            }
+        }
 
         List<StringBuilder> printableMap = new ArrayList<StringBuilder>();
 
