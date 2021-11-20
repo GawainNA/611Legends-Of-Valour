@@ -20,7 +20,8 @@ public class Weapon extends Equipment<Weapon>{
     }
 
     public void printDetail(){
-
+        System.out.println("Price:"+price+"  level requirement:"+level_require+"     Selling Price:"+selling_price);
+        System.out.println("Attack Damage:"+attack_damage+"  Ability Power:"+ability_power);
     }
 
     public int getAttack_damage() {

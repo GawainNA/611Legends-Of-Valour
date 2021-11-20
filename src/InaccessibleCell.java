@@ -1,5 +1,3 @@
-
-
 public class InaccessibleCell extends RPGCell {
 
     public InaccessibleCell(){

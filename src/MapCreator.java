@@ -1,10 +1,7 @@
-
 import java.util.ArrayList;
 import java.util.Collections;
 
-
 public class MapCreator {
-
     public static Map ValorMap(){
         Map map=new Map(8,8);
         map.cells= new RPGCell[][]{{new MonsterNexus(),new MonsterNexus(),new InaccessibleCell(),new MonsterNexus(),new MonsterNexus(),new InaccessibleCell(),new MonsterNexus(),new MonsterNexus()},

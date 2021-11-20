@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Hero extends Character {
 
-    int money=100;
+    int money=10000;
     Bag bag=new Bag();
     Armor armor;
     Weapon weapon;
@@ -25,6 +25,8 @@ public class Hero extends Character {
 
     Hero(String name){
         super(name);
+        attack_resist=100;
+        magic_resist=100;
         level=1;
         armor=ArmorFactory.createArmor("Usual Coat",0,0,1,1);
         weapon=WeaponFactory.createWeapon("Stick",0,0,1,1);
@@ -54,10 +56,10 @@ public class Hero extends Character {
     }
 
     public boolean addExp(int exp){
-        exp_current+=exp;
-        if( exp_current >= exp_expectation ){
+        exp_current += exp;
+        if ( exp_current >= exp_expectation ) {
             exp_current -= exp_expectation;
-            exp_expectation+=100;
+            exp_expectation += 10;
             levelUP();
             return true;
         }
@@ -100,16 +102,17 @@ public class Hero extends Character {
         return spells;
     }
 
-    public void printSpell(){
+    public boolean printSpell(){
         if(spells.isEmpty()){
             System.out.println("You don't have any Spells now!");
-            return;
+            return false;
         }
-        String result="";
-        for(int i=1;i<=spells.size();i++){
-            result=result.concat(i+". "+spells.get(i-1).getName()+"   ");
+        String result = "";
+        for (int i = 1; i <= spells.size(); i++){
+            result = result.concat(i + ". " + spells.get(i - 1).getName() + "   ");
         }
         System.out.println(result);
+        return true;
     }
 
     public void cast(Spell spell,Character NPC){
@@ -170,6 +173,33 @@ public class Hero extends Character {
 
     public void displayInformation(){
 
+    }
+
+    public void EnterBag(){
+        while (true){
+            if(isBagEmpty()){
+                System.out.println("Your bag is Empty!");
+                break;
+            }
+            System.out.println("Items in Your Bag:");
+            printBag();
+            int things= Utils.safeIntInput("Select one Item to know more details. Input -1 to get back.",-1,getBagSize());
+            if(things==-1){
+                break;
+            }
+            Item item = getItemFromBag(things-1);
+            System.out.println(item.getName()+"'s information:");
+            item.printDetail();
+            int subthings = Utils.safeIntInput("1. Use  2. Back", 1,2);
+            if(subthings==1){
+                if(item.getLevel_require()>getLevel()){
+                    System.out.println(getName()+" doesn't meet the Level requirement!");
+                    continue;
+                }
+                item.UseFromBag(getBag(),this);
+                System.out.println("Use Successfully!");
+            }
+        }
     }
 
 
