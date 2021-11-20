@@ -87,7 +87,7 @@ public class LegendsValor implements Playable {
             monsterAction(monster);
         }
         if (round % 8 == 0 && round != 0) {
-            System.out.print("New monsters spawned!!!");
+            System.out.println("New monsters spawned!!!");
             spawnMonster();
         }
     }
