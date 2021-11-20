@@ -77,7 +77,7 @@ public class LegendsValor implements Playable {
             boolean moved = false;
             while (!moved) {
                 PrintableValorMap.printMap(heroLocation, monsterLocation, heroes, monsters);
-                moved = heroMove(heroAction(), hero);
+                moved = heroMove(heroAction(hero), hero);
             }
         }
         for (Monster monster : monsters.getMonsters()) {
@@ -240,7 +240,8 @@ public class LegendsValor implements Playable {
     }
 
     // Play select hero action.
-    public String heroAction () {
+    public String heroAction (Hero h) {
+        System.out.println("You are controlling H" + (heroes.getHeroes().indexOf(h) + 1));
         System.out.println("Select your action:");
         System.out.println("W: Up  A: Left  S: Down  D: Right  T: Teleport  B: Back");
         System.out.println("1: Attack  2: Cast Spell  3: View Info and Equipment");
@@ -400,14 +401,14 @@ public class LegendsValor implements Playable {
                 return true;
             }
             case "3" -> {
-                
+                h.EnterBag();
+                return false;
             }
             default -> {
                 System.out.println("Illegal input.");
                 return false;
             }
         }
-        return false;
     }
 
     // Place a hero or a monster into another grid.
