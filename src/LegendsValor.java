@@ -53,7 +53,7 @@ public class LegendsValor implements Playable {
     public void gameStart() {
         round = 0;
         discovered = new int[] {7, 7, 7};
-        map = MapCreator.ValorMap();
+        map = MapCreator.RandomValorMap();
         pickHero();
         for (int i = 0; i < 3; i++) {
             monsters.add(createMonster());
@@ -75,7 +75,7 @@ public class LegendsValor implements Playable {
         for (Hero hero : heroes.getHeroes()) {
             boolean moved = false;
             while (!moved) {
-                PrintableValorMap.printMap(heroLocation, monsterLocation, heroes, monsters);
+                PrintableValorMap.printMap(map,heroLocation, monsterLocation, heroes, monsters);
                 printIconMatching();
                 System.out.println();
                 printMonsterInfo();
