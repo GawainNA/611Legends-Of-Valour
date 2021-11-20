@@ -1,12 +1,12 @@
 Name/level/attack_damage/ability_power/attack_resist/magic_resist/dodge chance
-Andrealphus     2       600   600    500  500   40
-Blinky          1       450   450    350  350   35
-Andromalius     3       550   550    450  450   25
-Chiang-shih     4       700   600    600   600  40
-FallenAngel     5       800   800    700  700   50
-Ereshkigall     6       950   950    450  450   35
-Melchiresas     7       350    350   150  150   75
-Jormunngand     8       600   600    900  900   20
-Rakkshasass     9       550   550    600   600  35
-Taltecuhtli     10      300   300    200  200   50
-Casper          1       100    100   100   100  50
+Andrealphus     2       60   60    500  500   40
+Blinky          1       45   45    350  350   35
+Andromalius     3       55   55    450  450   25
+Chiang-shih     4       70   60    600   600  40
+FallenAngel     5       80   80    700  700   50
+Ereshkigall     6       95   95    450  450   35
+Melchiresas     7       35    35   150  150   75
+Jormunngand     8       60   60    900  900   20
+Rakkshasass     9       55   55    600   600  35
+Taltecuhtli     10      30   30    200  200   50
+Casper          1       10    10   100   100  50

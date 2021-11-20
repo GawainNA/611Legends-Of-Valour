@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Hero extends Character {
 
-    int money=100;
+    int money=10000;
     Bag bag=new Bag();
     Armor armor;
     Weapon weapon;
@@ -25,6 +25,8 @@ public class Hero extends Character {
 
     Hero(String name){
         super(name);
+        attack_resist=100;
+        magic_resist=100;
         level=1;
         armor=ArmorFactory.createArmor("Usual Coat",0,0,1,1);
         weapon=WeaponFactory.createWeapon("Stick",0,0,1,1);
