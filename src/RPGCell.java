@@ -1,5 +1,3 @@
-
-
 public abstract class RPGCell {
     boolean isAccessible;
     boolean isHeroLocated;

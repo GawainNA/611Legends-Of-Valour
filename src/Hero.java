@@ -54,10 +54,10 @@ public class Hero extends Character {
     }
 
     public boolean addExp(int exp){
-        exp_current+=exp;
-        if( exp_current >= exp_expectation ){
+        exp_current += exp;
+        if ( exp_current >= exp_expectation ) {
             exp_current -= exp_expectation;
-            exp_expectation+=100;
+            exp_expectation += 10;
             levelUP();
             return true;
         }
@@ -100,16 +100,17 @@ public class Hero extends Character {
         return spells;
     }
 
-    public void printSpell(){
+    public boolean printSpell(){
         if(spells.isEmpty()){
             System.out.println("You don't have any Spells now!");
-            return;
+            return false;
         }
-        String result="";
-        for(int i=1;i<=spells.size();i++){
-            result=result.concat(i+". "+spells.get(i-1).getName()+"   ");
+        String result = "";
+        for (int i = 1; i <= spells.size(); i++){
+            result = result.concat(i + ". " + spells.get(i - 1).getName() + "   ");
         }
         System.out.println(result);
+        return true;
     }
 
     public void cast(Spell spell,Character NPC){
