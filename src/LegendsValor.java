@@ -176,8 +176,8 @@ public class LegendsValor implements Playable {
         String MNamList="";
         String MHPList="HP: ";
         for(int i=0;i<monsters.size();i++){
-            MNamList=MNamList.concat(String.format("M"+(i+1)+" :%-20s", monsters.get(i).getName()));
-            MHPList=MHPList.concat(String.format("%-5d /%-5d        ",monsters.get(i).getHP_current(),monsters.get(i).getHP_capacity()));
+            MNamList=MNamList.concat(String.format("M"+(i+1)+": %-20s", monsters.get(i).getName()));
+            MHPList=MHPList.concat(String.format("%-5d /%-5d            ",monsters.get(i).getHP_current(),monsters.get(i).getHP_capacity()));
         }
         System.out.println(MNamList);
         System.out.println(MHPList);
