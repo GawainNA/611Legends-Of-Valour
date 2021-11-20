@@ -173,6 +173,33 @@ public class Hero extends Character {
 
     }
 
+    public void EnterBag(){
+        while (true){
+            if(isBagEmpty()){
+                System.out.println("Your bag is Empty!");
+                break;
+            }
+            System.out.println("Items in Your Bag:");
+            printBag();
+            int things= Utils.safeIntInput("Select one Item to know more details. Input -1 to get back.",-1,getBagSize());
+            if(things==-1){
+                break;
+            }
+            Item item = getItemFromBag(things-1);
+            System.out.println(item.getName()+"'s information:");
+            item.printDetail();
+            int subthings = Utils.safeIntInput("1. Use  2. Back", 1,2);
+            if(subthings==1){
+                if(item.getLevel_require()>getLevel()){
+                    System.out.println(getName()+" doesn't meet the Level requirement!");
+                    continue;
+                }
+                item.UseFromBag(getBag(),this);
+                System.out.println("Use Successfully!");
+            }
+        }
+    }
+
 
     @Override
     public int getDamage() {
