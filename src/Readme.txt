@@ -1,6 +1,6 @@
-Name: Junyi Huang     TEAMMATES:      Name: Hantian Liu               Name: Aditya Pal
-BUID: U57383185                       BUID: U49252828                 BUID: U93001700
-
+Name: Junyi Huang               TEAMMATES:      Name: Hantian Liu               Name: Aditya Pal
+BUID: U57383185                                 BUID: U49252828                 BUID: U93001700
+Email: gawain7@bu.edu                           Email: htliu@bu.edu             Email: paditya@bu.edu
 
 Thank you for grading and reading this long readme. 
 
