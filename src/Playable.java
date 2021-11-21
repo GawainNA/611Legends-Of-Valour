@@ -3,5 +3,5 @@ public interface Playable {
     void gameEnd();
     void roundStart();
     void roundEnd();
-    void run();
+    void run() throws InterruptedException;
 }

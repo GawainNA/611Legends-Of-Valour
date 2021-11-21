@@ -2,6 +2,10 @@
 import java.util.*;
 
 public class LegendsValor implements Playable {
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+	Player player;
     public class Location{
         public int x;
         public int y;
@@ -103,7 +107,18 @@ public class LegendsValor implements Playable {
                 monsterWin = true;
         }
     }
-    public void run() {
+    public void run() throws InterruptedException {
+    	AsciiartFactory.printMan();
+    	String welcome = "WELCOME TO LEGENDS...BUCKLE UP TO FLY.....";
+        for (int i = 0; i < welcome.length(); i++) {
+            System.out.print( ANSI_RED + welcome.charAt(i)+ ANSI_RESET);
+            Thread.sleep(150L); // in milliseconds
+        }
+
+        AsciiartFactory.printHelicopter();
+        System.out.println(ANSI_GREEN+"Please input your name:"+ ANSI_RESET);
+        player=Player.createPlayer(scan.nextLine());
+        System.out.println("You can input -1 to Exit anytime.");
         gameStart();
         while (!heroWin && !monsterWin) {
             roundStart();
@@ -192,7 +207,7 @@ public class LegendsValor implements Playable {
     }
 
     void pickHero(){
-        Random random =new Random();
+        //Random random =new Random();
 
         while (true){
             System.out.println("Select your Heroes:");
@@ -201,39 +216,73 @@ public class LegendsValor implements Playable {
             int choice=Utils.safeIntInput("Select one to know more details",-1,4);
             switch (choice) {
                 case -1 -> {
+                	
                     System.out.println("Exit!");
                     return;
                 }
                 case 1 -> {
+                	List<String> wholeData=data.getTankData();
+                	int k=1;
+                	System.out.println("ID\tName\t\t    Mana    Stren    Agil   Dex    Start$  Start.XP");
+                	for (String element : wholeData) {
+                	    System.out.println(k+"\t"+element);
+                	    k++;
+                	}
                     System.out.println("Tank has high HP and Defense, is a good shield.");
                     System.out.println("Do you want to add Tank to your team?(y/n)");
 
                     if(scan.nextLine().equals("y")){
-                        List<String> wholeData=data.getTankData();
-                        String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                        //List<String> wholeData=data.getTankData();
+                    	int choice1=Utils.safeIntInput("Pick you Tank (1-6)",1,6);
+                    	String[] selected=wholeData.get(choice1-1).split("\\s+");
+                        //String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
                         Hero tank=HeroFactory.createTank(selected);
+                        System.out.println("you have picked "+tank.getName());
                         heroes.addHero(tank);
+                        //System.out.println(heroes.());
                     }
                 }
                 case 2 -> {
+                	data.getWarriorData();
+                	List<String> wholeData=data.getWarriorData();
+                	int k1=1;
+                	System.out.println("ID\tName\t\t    Mana    Stren    Agil   Dex    Start$  Start.XP");
+                	for (String element : wholeData) {
+                	    System.out.println(k1+"\t"+element);
+                	    k1++;
+                	}
                     System.out.println("Warrior has high attack damage.");
                     System.out.println("Do you want to add Warrior to your team?(y/n)");
+                    
 
                     if(scan.nextLine().equals("y")){
-                        List<String> wholeData=data.getWarriorData();
-                        String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                    	int choice1=Utils.safeIntInput("Pick you Warrior (1-6)",1,6);
+                    	String[] selected=wholeData.get(choice1-1).split("\\s+");
+                        //String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
                         Hero warrior=HeroFactory.createWarrior(selected);
+                        System.out.println("you have picked "+warrior.getName());
                         heroes.addHero(warrior);
                     }
                 }
                 case 3 -> {
+                	int k2=1;
+                	data.getCasterData();
+                	List<String> wholeData=data.getCasterData();
+                	System.out.println("ID\tName\t\t        Mana    Stren   Agil    Dex    Start$  Start.XP");
+                	for (String element : wholeData) {
+                	    System.out.println(k2+"\t"+element);
+                	    k2++;
+                	}
                     System.out.println("Caster has high Magic damage, but low HP.");
                     System.out.println("Do you want to add Caster to your team?(y/n)");
                     if(scan.nextLine().equals("y")){
-                        List<String> wholeData=data.getCasterData();
-                        String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
+                        //List<String> wholeData=data.getCasterData();
+                    	int choice1=Utils.safeIntInput("Pick you Caster (1-6)",1,6);
+                    	String[] selected=wholeData.get(choice1-1).split("\\s+");
+                        //String[] selected=wholeData.get(random.nextInt(wholeData.size())).split("\\s+");
                         Hero caster=HeroFactory.createCaster(selected);
                         heroes.addHero(caster);
+                        System.out.println("you have picked "+caster.getName());
                     }
                 }
             }
