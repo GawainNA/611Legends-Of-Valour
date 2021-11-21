@@ -93,7 +93,7 @@ public class Market {
 
     public void EnterMarket(Hero hero){
         while (true){
-            System.out.println("You are in the Market now! What do you want to do?");
+            System.out.println("Hero "+hero.getName()+" is in the Market now! What do you want to do?");
             int choice;
             choice = Utils.safeIntInput("1. Buy    2. Sell    3. Exit",1,3);
             switch (choice){
@@ -106,7 +106,7 @@ public class Market {
 
     public void EnterBuy(Hero hero){
         while (true){
-            System.out.println("Which one do you want to buy? ");
+            System.out.println("Which one do you want to buy?            Hero "+hero.getName()+"'s current money is "+hero.getMoney());
             printMarket();
             int choice= Utils.safeIntInput("Select one Item to know more details. Input -1 to get back.",-1,market.size());
             if(choice==-1){

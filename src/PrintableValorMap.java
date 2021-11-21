@@ -25,18 +25,28 @@ public class PrintableValorMap {
     public static final String WHITE_BACKGROUND = "\033[47m";  // WHITE
 
 
-    // High Intensity backgrounds
-    public static final String BLACK_BACKGROUND_BRIGHT = "\033[0;100m";// BLACK
-    public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
-    public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
-    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
-    public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
-    public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
-    public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
-    public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+    // High Intensity
+    public static final String BLACK_BRIGHT ="\033[0;90m";  // BLACK
+    public static final String RED_BRIGHT ="\033[0;91m";    // RED
+    public static final String GREEN_BRIGHT ="\033[0;92m";  // GREEN
+    public static final String YELLOW_BRIGHT ="\033[0;93m"; // YELLOW
+    public static final String BLUE_BRIGHT ="\033[0;94m";   // BLUE
+    public static final String PURPLE_BRIGHT ="\033[0;95m"; // PURPLE
+    public static final String CYAN_BRIGHT ="\033[0;96m";   // CYAN
+    public static final String WHITE_BRIGHT ="\033[0;97m";  // WHITE
 
+    //words color
+    public static final String ANSI_RESET ="\u001B[0m";
+    public static final String ANSI_BLACK ="\u001B[30m";
+    public static final String ANSI_RED ="\u001B[31m";
+    public static final String ANSI_GREEN ="\u001B[32m";
+    public static final String ANSI_YELLOW ="\u001B[33m";
+    public static final String ANSI_BLUE ="\u001B[34m";
+    public static final String ANSI_PURPLE ="\u001B[35m";
+    public static final String ANSI_CYAN ="\u001B[36m";
+    public static final String ANSI_WHITE ="\u001B[37m";
 
-    private static String getOuterCellStr(char c){
+    private static String getOuterCellStr(String c){
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < 2; i++) {
             str.append(c).append(" - ");
@@ -54,7 +64,7 @@ public class PrintableValorMap {
         String heroIcon=null;
         for(Hero hero :heroes.getHeroes()){
             if(col == HL.get(hero).x && row == HL.get(hero).y){
-                heroIcon= GREEN_BACKGROUND_BRIGHT+"H"+indexH+CYAN_BACKGROUND;
+                heroIcon= CYAN_BRIGHT+"H"+indexH+ANSI_RESET;
                 break;
             }
             indexH++;
@@ -67,7 +77,7 @@ public class PrintableValorMap {
         String monsterIcon=null;
         for(Monster monster: monsters.getMonsters()){
             if(col == ML.get(monster).x && row == ML.get(monster).y){
-                monsterIcon = RED_BACKGROUND_BRIGHT+"M"+indexM+CYAN_BACKGROUND;
+                monsterIcon = RED_BRIGHT+"M"+indexM+ANSI_RESET;
             }
             indexM++;
         }
@@ -81,29 +91,29 @@ public class PrintableValorMap {
     private static void createInnerCell(CellType[][] map, List<StringBuilder> printableMap, int row, int col,HashMap<Hero, LegendsValor.Location> HL, HashMap<Monster, LegendsValor.Location> ML, TeamHero heroes,TeamMonster monsters) {
         String component = getCellComponent(row/3, col,HL,ML,heroes,monsters);
         if (map[row/3][col] == CellType.INACCESSIBLE)
-            component = RED_BACKGROUND+"X X X"+CYAN_BACKGROUND;
+            component = RED_BACKGROUND+"X X X"+RESET;
         printableMap.get(row).append(getInnerCellStr(component));
     }
 
     private static void createOutterCell(CellType[][] map, List<StringBuilder> printableMap, int row, int col) {
         switch (map[row/3][col]){
             case NEXUS:
-                printableMap.get(row).append(getOuterCellStr('N'));
+                printableMap.get(row).append(getOuterCellStr(ANSI_GREEN+'N'+ANSI_RESET));
                 break;
             case PLAIN:
-                printableMap.get(row).append(getOuterCellStr('P'));
+                printableMap.get(row).append(getOuterCellStr("P"));
                 break;
             case KOULOU:
-                printableMap.get(row).append(getOuterCellStr('K'));
+                printableMap.get(row).append(getOuterCellStr(ANSI_PURPLE+'K'+ANSI_RESET));
                 break;
             case CAVE:
-                printableMap.get(row).append(getOuterCellStr('C'));
+                printableMap.get(row).append(getOuterCellStr(ANSI_YELLOW+'C'+ANSI_RESET));
                 break;
             case BUSH:
-                printableMap.get(row).append(getOuterCellStr('B'));
+                printableMap.get(row).append(getOuterCellStr(ANSI_BLUE+'B'+ANSI_RESET));
                 break;
             case INACCESSIBLE:
-                printableMap.get(row).append(getOuterCellStr('I'));
+                printableMap.get(row).append(getOuterCellStr(ANSI_RED+"I"+ANSI_RESET));
                 break;
         }
     }
@@ -166,12 +176,12 @@ public class PrintableValorMap {
 
         for (int i = 0; i < size * 3; i++) {
         	if (i%3==0) {
-                System.out.print(CYAN_BACKGROUND_BRIGHT+printableMap.get(i));}
+                System.out.print(printableMap.get(i));}
             	else if (i%3==1) {
-            		System.out.print(CYAN_BACKGROUND +printableMap.get(i));
+            		System.out.print(printableMap.get(i));
             	}
             	else if (i%3==2) {
-            		System.out.print(WHITE_BACKGROUND+printableMap.get(i));
+            		System.out.print(printableMap.get(i));
         }}
     }
 }

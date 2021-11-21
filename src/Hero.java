@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Hero extends Character {
 
-    int money=10000;
+    int money;
     Bag bag=new Bag();
     Armor armor;
     Weapon weapon;
@@ -178,10 +178,10 @@ public class Hero extends Character {
     public void EnterBag(){
         while (true){
             if(isBagEmpty()){
-                System.out.println("Your bag is Empty!");
+                System.out.println("Hero "+name+ "'s bag is Empty!");
                 break;
             }
-            System.out.println("Items in Your Bag:");
+            System.out.println("Items in Hero "+name+"'s Bag:                               Hero "+name+"'s money is "+money);
             printBag();
             int things= Utils.safeIntInput("Select one Item to know more details. Input -1 to get back.",-1,getBagSize());
             if(things==-1){
