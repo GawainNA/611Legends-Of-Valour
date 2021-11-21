@@ -43,6 +43,8 @@ public class LegendsValor implements Playable {
     boolean monsterWin;
     Random random;
 
+    SoundFactory soundClass = new SoundFactory(this);
+
     public LegendsValor () {
         scan = new Scanner(System.in);
         heroWin = false;
@@ -54,7 +56,18 @@ public class LegendsValor implements Playable {
         random = new Random();
     }
 
-    public void gameStart() {
+    public void gameStart() throws InterruptedException {
+        AsciiartFactory.printMan();
+        String welcome = "WELCOME TO LEGENDS...BUCKLE UP TO FLY.....";
+        for (int i = 0; i < welcome.length(); i++) {
+            System.out.print( ANSI_RED + welcome.charAt(i)+ ANSI_RESET);
+            Thread.sleep(150L); // in milliseconds
+        }
+        AsciiartFactory.printHelicopter();
+        System.out.println(ANSI_GREEN+"Please input your name:"+ ANSI_RESET);
+        player=Player.createPlayer(scan.nextLine());
+        System.out.println("You can input -1 to Exit anytime.");
+
         round = 0;
         discovered = new int[] {7, 7, 7};
         map = MapCreator.RandomValorMap();
@@ -107,20 +120,24 @@ public class LegendsValor implements Playable {
                 monsterWin = true;
         }
     }
-    public void run() throws InterruptedException {
-    	AsciiartFactory.printMan();
-    	String welcome = "WELCOME TO LEGENDS...BUCKLE UP TO FLY.....";
-        for (int i = 0; i < welcome.length(); i++) {
-            System.out.print( ANSI_RED + welcome.charAt(i)+ ANSI_RESET);
-            Thread.sleep(150L); // in milliseconds
-        }
 
-        AsciiartFactory.printHelicopter();
-        System.out.println(ANSI_GREEN+"Please input your name:"+ ANSI_RESET);
-        player=Player.createPlayer(scan.nextLine());
-        System.out.println("You can input -1 to Exit anytime.");
+    public boolean judge(){
+        return !heroWin && !monsterWin;
+    }
+    public void runWithBGM()  {
+
+        soundClass.GameStartWithBGM("StarWars60");
+        soundClass.disposeSound();
+
+        soundClass.GameRunningWithBGM("Subway");
+        soundClass.disposeSound();
+        soundClass.GameEndWithBGM("success");
+        return;
+    }
+
+    public void run() throws InterruptedException {
         gameStart();
-        while (!heroWin && !monsterWin) {
+        while (judge()){
             roundStart();
             roundEnd();
         }
