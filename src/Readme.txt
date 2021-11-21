@@ -9,6 +9,7 @@ Run Instruction : 1.make sure you are in the "src" folder or super folder of "sr
 *** We Implement Colorful words and Background in our Code. Please make sure you could run java with colors. ***
 *** If you are in windows, both Cmder and Git Bash could run with colors well!                               ***
 
+( IF there are errors with sound, please open GameLauncher.java and switch "m.runWithBGM()" to "m.run()". )
 
 ------------------------------------------------------------------------------------------------------------------------
 Game Rules Description:
