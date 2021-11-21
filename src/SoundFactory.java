@@ -3,7 +3,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 
-public class SoundFactory implements Runnable,PlayableWithBGM
+public class SoundFactory implements Runnable, PlayableWithBGM
 {
     private boolean running = false;
     private Thread thread;

@@ -42,8 +42,7 @@ public class LegendsValor implements Playable {
     boolean heroWin;
     boolean monsterWin;
     Random random;
-
-    SoundFactory soundClass = new SoundFactory(this);
+    SoundFactory soundClass;
 
     public LegendsValor () {
         scan = new Scanner(System.in);
@@ -54,6 +53,7 @@ public class LegendsValor implements Playable {
         heroLocation = new HashMap<>();
         monsterLocation = new HashMap<>();
         random = new Random();
+        soundClass = new SoundFactory(this);
     }
 
     public void gameStart() throws InterruptedException {
