@@ -19,7 +19,7 @@ public class AsciiartFactory {
 			System.out.println("           I     I      ");
 			System.out.println("        -----------/              ");
 			System.out.println("                       ");
-			System.out.println("      Team 13's Helicopter!              ");
+			System.out.println("      Team's Helicopter!              ");
 
 			Thread.sleep(50);
 
@@ -36,7 +36,7 @@ public class AsciiartFactory {
 			System.out.println("           I     I      ");
 			System.out.println("        -----------/              ");
 			System.out.println("                       ");
-			System.out.println("      Team 13's Helicopter!              ");
+			System.out.println("      Team's Helicopter!              ");
 
 			Thread.sleep(50);
 			t++;

@@ -1,24 +1,24 @@
-Name: Junyi Huang
-BUID:U57383185
+Name: Junyi Huang     TEAMMATES:      Name: Hantian Liu               Name: Aditya Pal
+BUID: U57383185                       BUID: U49252828                 BUID: U93001700
+
 
 Thank you for grading and reading this long readme. 
 
-Run Instrcution : javac GameLauncher.java(may have warning but it's doesn't matter for running) and then java GameLauncher
+Run Instruction : 1.make sure you are in the "src" folder or super folder of "src" 2. run "javac GameLauncher.java" 3 run "java GameLauncher"
+
+*** We Implement Colorful words and Background in our Code. Please make sure you could run java with colors. ***
+*** If you are in windows, both Cmder and Git Bash could run with colors well!                               ***
+
+
 ------------------------------------------------------------------------------------------------------------------------
 Game Rules Description:
-Almost the same as the Assignment's game rules. But I changed some rules, here are the differences.
+Almost the same as the Assignment's game rules. But I changed some rules. Here are the differences:
 
-1. Map has Five types of area(cell):
-   "X" means inaccessible, you cannot enter this area.
-   "?" means dangerous area, you may meet Monsters here.
-   "M" means Market, you could buy and sell Items here.
-   "B" means Boss Area. Do not Enter this place without enough preparation.
-   " " means safe area, you can pass this area without any events.
 
-2. When your screen is showing the map, you can move, exit game, look up Heroes' information and bag, even when you are in a dangerous area.
-   But Please notice that if you did one action in a dangerous area, like looking up bag or Heroes' information, Monsters may find you after that.
+1. When your screen is showing the map, you can move, exit game, look up Heroes' information and bag at any rounds.
+   And when you look up bag, you could select one of Items in bag to use, like drinking potions and switching Weapons and Armories.
 
-3. Any Characters in this game including Hero and Monster all have the same attributes below:
+2. Any Characters in this game including Hero and Monster all have the same attributes below:
    HP: Health Points.
    MP: Mana Points
    AD: Attack Damage, means ability of physical attack.
@@ -26,15 +26,12 @@ Almost the same as the Assignment's game rules. But I changed some rules, here a
    AR: Attack resist, means ability of defensing attack damage, useless to magical attack.
    MR: Magic resist, means ability of defensing magical attack, useless to physical attack.
 
-4. You could only select these three types of Heroes.
+3. You could only select these three types of Heroes.
    Tank: High Health Point and High defense.  Warrior: High Attack Damage.  Caster: High Ability Power
    You can repeatedly select the same type of Heroes, but up to three Heroes at most.
-   (I only create three Heroes for each type in the game, but the data could be easily changed in the data.java file)
 
-5. Player has one bag and one wallet. They will be used by all Heroes together in this game.
-
-6. When you are in a Market, you can buy anything if your money is enough, don't need to worried about the level requirement.
-   But When you want to use one Item, if a Hero doesn't meet the item's level requirement, you cannot use it for that Hero.
+4. When a Hero is in a Hero Nexus, you can buy anything if the Hero's money is enough regardless the level requirement.
+   But When you want to use one Item, if a Hero doesn't meet the item's level requirement, the Hero cannot use it.
 
 All the rest of my Game Rules are the same as Assignment's Description.
 
@@ -42,21 +39,29 @@ All the rest of my Game Rules are the same as Assignment's Description.
 ------------------------------------------------------------------------------------------------------------------------
 Class Description:
 General :
-               |<---Contain--- Bag <----------|
-    ----> Item |<---Contain--- Character <----|----Contain--- Player <-----|
-    |                                                                      |
-    |-----Market <----|---USE---RPGCell <---Contain--- Map <---------------|----Contain---Legends
-     BattleField <----|
+                                                                    TeamMonster <------------|
+                    |<------- Bag <-----|                                                    |
+ Item <---Contain---|-------------------|<---Contain--- Hero <-----Contain--- TeamHero <-----|
+                    |                                                                        |
+                    |---------Market <----USE---RPGCell <---Contain--- Map <-----------------|----Contain---LegendsValor
+                                                                       player <--------------|
 
-Legends have one Player and one Map.
-Player has one Bag and some Heroes.
-Bag has some items. Items can be used by Player from bag to Hero.
-Market also has some items. Item can be sold and bought here.
-BattleField has some Monsters and use some Heroes to call a Battle Round.
-Map has some RPGCells. When Heroes come into one Cell, Legends will call the cellFunction in that Cell. Like MarketCell
-                       will call a Market, DangerousCell will Call a BattleField.
 
-PS: I read data from data.java file, so I don't have any other TXT file for data.
+Legends have one Player, one Map, one Team of Heroes and one Team of Monsters.
+TeamHero has some Heroes, TeamMonster has some Monsters.
+Hero has one bag.
+Bag has some items. Items can be used by Hero.
+Market also has some items. Item can be sold and bought between Hero's bag and market.
+Map has some RPGCells. When Heroes come into one Cell, Legends will call the cellFunction in that Cell.
+
+---------------------------------------------------
+                          LegendsValor Design
+
+<<Playable>> <---implement--- LegendsValor ---Contain---> SoundFactory---implement---> <<PlayableWithBGM>>
+
+LegendsValor is a basic game Class that can be played. So we create Interface <Playable> which defines basic methods of playable game.
+SoundFactory is a Class that help Playable game to play with background music. So we create Interface <PlayableWithBGM> which defines basic add-music methods corresponding <Playable>
+(In the SoundFactory Class, we create an Audio Input Stream,using a clip of music. And then open the clip and start with loop)
 
 ---------------------------------------------------
                           Item Design Pattern
@@ -86,27 +91,27 @@ All these Classes have the corresponding Factories to build them for others.
 
 --------------------------------------------------
                           Cell Design Pattern
-RPGCell <---extends BossCell & DangerousCell & InaccessibleCell & MarketCell & SafeCell
+RPGCell <---extends BushCell & CaveCell & InaccessibleCell & KouLouCell & SafeCell
+        <---extends NexusCell <---extends HeroNexusCell & Monster NexusCell
 
-RPGCell defines general Cell methods in map. When Hero enter one cell, cell will auto call cellFunction() method.
-BossCell will call the Boss Battle.
-DangerousCell may call the usual Battle between Heroes and Monsters.
-MarketCell will call the Entering Market method.
+RPGCell defines general Cell methods in map. When Hero enter one cell, cell will auto call inCellFunction() method, and call outCellFunction() when Hero go out.
+BushCell & CaveCell & KouLouCell are used to improve one of Hero's attributes.
+NexusCell defines common methods and attributes of Nexus, currently no content inside, but it's convenient to add some common things of Hero & Monster Nexus.
+HeroNexusCell defines the different processes base on different situations. When Hero enter the HeroNexusCell, it will call the market.  When Monster enter here, it will add lose decision to system.
+MonsterNexusCell is similar to HeroNexusCell. But No extra process for Monster.
 
 --------------------------------------------------
-                          BattleField Design
-Auto Create Monsters based on Heroes.
-Has Two types of battle, Boss battle and usual battle.
+                          Team Design Pattern
+Team <---extends TeamHero & TeamMonster
 
+Team defines general Team methods and attributes.
+TeamHero has a list of Heroes
+TeamMonster has a list of Monsters
 ---------------------------------------------------
                           Market Design
-Buy and Sell between player and market.
-Using bag and money from player.
 
----------------------------------------------------
-                          Player Design
-Have one bag and some Heroes.
-Only game logic method is to lookup bag.
+Buy and Sell between Hero and market.
+Using bag and money from Hero.
 
 ------------------------------------------------------------------------------------------------------------------------
 
