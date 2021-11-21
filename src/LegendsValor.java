@@ -232,12 +232,12 @@ public class LegendsValor implements Playable {
             System.out.println();
             int choice=Utils.safeIntInput("Select one to know more details",-1,4);
             switch (choice) {
-                case -1 -> {
+                case -1 : {
                 	
                     System.out.println("Exit!");
                     return;
                 }
-                case 1 -> {
+                case 1 : {
                 	List<String> wholeData=data.getTankData();
                 	int k=1;
                 	System.out.println("ID\tName\t\t    Mana    Stren    Agil   Dex    Start$  Start.XP");
@@ -259,7 +259,7 @@ public class LegendsValor implements Playable {
                         //System.out.println(heroes.());
                     }
                 }
-                case 2 -> {
+                case 2 : {
                 	data.getWarriorData();
                 	List<String> wholeData=data.getWarriorData();
                 	int k1=1;
@@ -281,7 +281,7 @@ public class LegendsValor implements Playable {
                         heroes.addHero(warrior);
                     }
                 }
-                case 3 -> {
+                case 3 : {
                 	int k2=1;
                 	data.getCasterData();
                 	List<String> wholeData=data.getCasterData();
@@ -381,7 +381,7 @@ public class LegendsValor implements Playable {
         ArrayList<Monster> targets = detectMonster(h);
         Location currentLocation = heroLocation.get(h);
         switch (action) {
-            case "w" -> {
+            case "w" : {
                 Location goal = new Location(currentLocation.x, currentLocation.y - 1);
                 if (move(h, goal, false)) {
                     if (goal.x < discovered[goal.getLane()]) {
@@ -394,7 +394,7 @@ public class LegendsValor implements Playable {
                     return false;
                 }
             }
-            case "a" -> {
+            case "a" : {
                 Location goal = new Location(currentLocation.x - 1, currentLocation.y);
                 if (move(h, goal, false))
                     return true;
@@ -403,7 +403,7 @@ public class LegendsValor implements Playable {
                     return false;
                 }
             }
-            case "s" -> {
+            case "s" : {
                 Location goal = new Location(currentLocation.x, currentLocation.y + 1);
                 if (move(h, goal, false))
                     return true;
@@ -412,7 +412,7 @@ public class LegendsValor implements Playable {
                     return false;
                 }
             }
-            case "d" -> {
+            case "d" : {
                 Location goal = new Location(currentLocation.x + 1, currentLocation.y);
                 if (move(h, goal, false))
                     return true;
@@ -421,7 +421,7 @@ public class LegendsValor implements Playable {
                     return false;
                 }
             }
-            case "t" -> {
+            case "t" : {
                 int lane, x, y;
                 Location current = heroLocation.get(h);
                 lane = Utils.safeIntInput("Which lane you want to go? (1-3)", 1, 3) - 1;
@@ -443,7 +443,7 @@ public class LegendsValor implements Playable {
                     return false;
                 }
             }
-            case "b" -> {
+            case "b" : {
                 Location current = heroLocation.get(h);
                 Location goal = new Location(current.x, 7);
                 if (!move(h, goal, false)) {
@@ -457,7 +457,7 @@ public class LegendsValor implements Playable {
                 }
                 return true;
             }
-            case "1" -> {
+            case "1" : {
                 Monster target = selectTarget(targets);
                 if (target == null)
                     return false;
@@ -479,7 +479,7 @@ public class LegendsValor implements Playable {
                 }
                 return true;
             }
-            case "2" -> {
+            case "2" : {
                 Monster target = selectTarget(targets);
                 if (target == null)
                     return false;
@@ -492,12 +492,12 @@ public class LegendsValor implements Playable {
                 }
                 return true;
             }
-            case "3" -> {
+            case "3" : {
                 displayHeroInformation(h);
                 h.EnterBag();
                 return false;
             }
-            default -> {
+            default : {
                 System.out.println("Illegal input.");
                 return false;
             }
