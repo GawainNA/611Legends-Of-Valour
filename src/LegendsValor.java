@@ -257,6 +257,7 @@ public class LegendsValor implements Playable {
                         System.out.println("you have picked "+tank.getName());
                         heroes.addHero(tank);
                         //System.out.println(heroes.());
+                        break;
                     }
                 }
                 case 2 : {
@@ -279,6 +280,7 @@ public class LegendsValor implements Playable {
                         Hero warrior=HeroFactory.createWarrior(selected);
                         System.out.println("you have picked "+warrior.getName());
                         heroes.addHero(warrior);
+                        break;
                     }
                 }
                 case 3 : {
@@ -300,6 +302,7 @@ public class LegendsValor implements Playable {
                         Hero caster=HeroFactory.createCaster(selected);
                         heroes.addHero(caster);
                         System.out.println("you have picked "+caster.getName());
+                        break;
                     }
                 }
             }
