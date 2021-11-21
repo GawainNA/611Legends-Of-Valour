@@ -1,5 +1,3 @@
-
-
 public abstract class RPGCell {
     boolean isAccessible;
     boolean isHeroLocated;
@@ -21,6 +19,8 @@ public abstract class RPGCell {
         return isAccessible;
     }
 
-    public abstract void cellFunction(Player player);
+    public abstract void inCellFunction(Character NPC);
+    public abstract void outCellFunction(Character NPC);
+
     public abstract String toString();
 }

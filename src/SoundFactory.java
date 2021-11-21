@@ -42,16 +42,19 @@ public class SoundFactory implements Runnable
                     this.inputStream = AudioSystem.getAudioInputStream(SoundFactory.class.getResource(url));
                     this.clip.open(inputStream);
                     this.clip.loop(10);
-                    Legends m=new Legends();
-                    m.startGame();
-                }
-                catch(Exception e)
+                    LegendsValor m = new LegendsValor();
+                    
+            			m.run();
+            		
+            
+        
+    }catch(Exception e)
                 {
-                    e.printStackTrace();
+        e.printStackTrace();
+    }
                 }
             }
         }
-    }
 
     public void playBackGround(String string) // call to play .wav file
     {

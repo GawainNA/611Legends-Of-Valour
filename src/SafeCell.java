@@ -3,7 +3,13 @@
 public class SafeCell extends RPGCell {
 
     @Override
-    public void cellFunction(Player player){
+
+    public void inCellFunction(Character NPC){
+
+    }
+
+    public void outCellFunction(Character NPC){
+
 
     }
 

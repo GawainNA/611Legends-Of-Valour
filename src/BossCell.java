@@ -1,9 +1,14 @@
 
 public class BossCell extends RPGCell {
+
     @Override
-    public void cellFunction(Player player){
-        BattleField battleField = BattleField.createABattleField(player);
-        battleField.BossCome();
+
+    public void inCellFunction(Character NPC){
+    }
+
+    public void outCellFunction(Character NPC){
+
+
     }
     public String toString(){
         if(isHeroLocated){

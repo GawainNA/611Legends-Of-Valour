@@ -9,9 +9,6 @@ public class Armor extends Equipment<Armor> {
         this.magic_resist=magic_resist;
     }
 
-    public static Armor createArmor(String name, int price, int level_require,int attack_resist,int magic_resist){
-        return new Armor(name, price, level_require, attack_resist, magic_resist);
-    }
 
     public Armor equip(Hero hero){
         Armor replaced = hero.getArmor();

@@ -1,15 +1,25 @@
 
 public class Map {
-	public static final String CYAN_BACKGROUND = "\033[46m";
-	public static final String RESET = "\033[0m";
     int row;
     int column;
-    RPGCell[][] Cells;
+    RPGCell[][] cells;
 
     Map(int row, int column){
         this.row=row;
         this.column=column;
-        Cells = new RPGCell[row][column];
+        cells = new RPGCell[row][column];
+    }
+
+    public Map() {
+        this(8, 8);
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getRow() {
+        return row;
     }
 
     public void printMap(){
@@ -21,14 +31,13 @@ public class Map {
         String result="";
         for(int i=0;i<row;i++){
             for(int j=0;j<column;j++){
-                col_b=col_b.concat(Cells[i][j]+" |");
+                col_b=col_b.concat(cells[i][j]+" |");
             }
             result=result.concat(col_a+"\n"+col_b+"\n");
             col_b="|";
         }
         result=result.concat(col_a);
-        System.out.println(CYAN_BACKGROUND+result+RESET);
+        System.out.println(result);
     }
-
 
 }
